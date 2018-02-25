@@ -1,0 +1,77 @@
+/*
+html{
+  height:100%;
+}
+
+body {
+  background-color: rgb(31, 15, 255);
+  height:100%;
+}
+
+label {
+  color: white;
+}
+
+small {
+  color: white;
+}
+
+.navbar {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+
+    /* the rest of your styling */
+
+/*
+p {
+  margin:5px;
+}
+
+.btn-nav {
+  border-color: white;
+  background-color: red;
+  color:white;
+  -webkit-transition:0.5s;
+}
+
+.btn-nav:hover{
+  background-color: blue;
+}
+
+.btn-seller{
+  background-color:white; 
+  border-color:transparent;
+  border-radius:5px; 
+  margin-top:10px;  
+  font-weight:bold
+}
+
+.btn-seller:hover{
+  background-color:red;
+  color:white !important;
+}
+
+/*body {
+  background-image: url("../img/background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+}
+
+
+.input {
+  margin:5px;
+  border-radius:10px;
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    background-color: rgb(31, 15, 255);
+    overflow: show;
+  }
+}
+*/

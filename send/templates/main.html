@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MakeItHappen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    /*body{
+      background-image: url("{{url_for('static',filename='img/city-sunrise.png')}}");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:100vh;
+    }*/
+    .mySlides {
+      display:none
+    }
+    .w3-left, .w3-right, .w3-badge {
+      cursor:pointer
+    }
+    .w3-badge {
+      height:13px;
+      width:13px;
+      padding:0
+    }
+    body{
+      background-color: rgba(0,0,0,0.5);
+    }
+    .slide{
+      display:none;
+    }
+    #main{
+      background-image: url("{{url_for('static',filename='img/background-white.jpg')}}");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:95vh;
+    }
+    #second{
+      background-image: url("{{url_for('static',filename='img/city-sunrise.png')}}");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:95vh; 
+    }
+    a{
+      color:black;
+    }
+    /*nav:hover{
+      background-color: rgba(0,0,0,0.3);
+    }*/
+    nav{
+      background-color: rgba(0,0,0,0.6);
+    }
+    #logo{
+      height:30px;
+      width:30px;
+    }
+    .btn-nav {
+      border-color: black;
+      background-color: transparent;
+      color:white;
+      -webkit-transition:0.5s;
+    }
+
+    .btn-nav:hover{
+      border-color: transparent;
+      background-color: #047564;
+      color:white;
+    }
+
+    #btn-seller{
+      border-color: black;
+      background-color: rgba(255,255,255,0.5);
+      color:black;
+      -webkit-transition:0.5s;
+    }
+    #btn-seller:hover{
+      background-color: rgba(0,0,0,0.5);
+      color:white;
+    }
+    @media only screen and (max-width: 900px){
+      .text-desktop{
+        display:none;
+      }
+    }
+  </style>
+  <body style="">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
+      <a href="#" class="navbar-brand" style="font-family: 'Farsan', cursive;"><img id="logo" src="{{url_for('static', filename='img/logo-trimmed.png')}}" /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Our Partner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Login</a>
+          </li>
+          <li class="nav-item mr-sm-2">
+            <a class="btn btn-nav" href="/sign_up">Sign Up!</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="slide row w3-animate-right" id="main" style="font-family: 'Roboto Condensed', sans-serif;">
+            <!--<div class="col-md-6 offset-md-3" style="color:white; padding-left:5%; margin-top:100px">-->
+              <div class="text-desktop col-xl-3 offset-md-2" style="color:black; margin-top:150px">
+                <img class="logo-body img-respoinsve" src="{{url_for('static',filename='img/logo-trimmed.png')}}">
+              </div>
+              <div class="col-xl-3" style="color:black; margin-top:150px">
+                <p style="font-size: 2.5em">ITB Business Platform</p>
+                <p>We promote innovation, art creation and assist startups of ITB students into public by providing a platform to make it come alive</p>
+                <a class="btn btn-nav" id="btn-seller" href="/be_a_seller">Be A Seller!</a>
+              </div>
+            </div>
+        </div>
+        <div class="slide row w3-animate-right" id="second" style="font-family: 'Roboto Condensed', sans-serif;">
+            <!--<div class="col-md-6 offset-md-3" style="color:white; padding-left:5%; margin-top:100px">-->
+              <div class="text-desktop col-xl-3 offset-md-2" style="color:black; margin-top:150px">
+                <img class="img-respoinsve" src="{{url_for('static',filename='img/logo-trimmed.png')}}">
+              </div>
+              <div class="col-xl-3" style="color:black; margin-top:150px">
+                <p style="font-size: 2.5em">ITB Business Platform</p>
+                <p>We promote innovation, art creation and assist startups of ITB students into public by providing a platform to make it come alive</p>
+                <a class="btn btn-nav" id="btn-seller">Be A Seller!</a>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 offset-md-4 text-center">
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+            <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+          </div>
+        </div>
+        <script>
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function currentDiv(n) {
+          showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("slide");
+          var dots = document.getElementsByClassName("demo");
+          if (n > x.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+             dots[i].className = dots[i].className.replace(" w3-white", "");
+          }
+          x[slideIndex-1].style.display = "flex";  
+          dots[slideIndex-1].className += " w3-white";
+         }
+        </script>
+    </div>
+  </body>
+</html>

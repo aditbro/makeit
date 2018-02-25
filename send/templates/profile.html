@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MakeItHappen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    .container{
+      background-color: white;
+    }
+    body {
+      background-color: rgb(230,230,230)
+    }
+    a{
+      color:black;
+    }
+    .w3-left, .w3-right, .w3-badge {
+      cursor:pointer
+    }
+    .w3-badge {
+      height:13px;
+      width:13px;
+      padding:0
+    }
+    /*nav:hover{
+      background-color: rgba(0,0,0,0.3);
+    }*/
+    nav{
+      background-color: rgba(0,0,0,0.6);
+    }
+    #logo{
+      height:30px;
+      width:30px;
+    }
+    .btn-nav {
+      border-color: black;
+      background-color: transparent;
+      color:white;
+      -webkit-transition:0.5s;
+    }
+
+    .btn-nav:hover{
+      border-color: transparent;
+      background-color: #047564;
+      color:white;
+    }
+    .mySlides {
+      display:none;
+      width: 40vw;
+      height:50vh;
+    }
+    .btn-tags{
+      color:black;
+      -webkit-transition:0.2s;
+    }
+    .btn-tags:hover{
+      border-color: transparent;
+      background-color: rgba(0,0,0,0.5);
+      color:white; 
+    }
+    @media only screen and (max-width: 900px){
+      .mySlides {
+        display:none;
+        width: 93vw;
+        height:50vh;
+      }
+    }
+  </style>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
+      <a href="/" class="navbar-brand" style="font-family: 'Farsan', cursive;"><img id="logo" src="{{url_for('static', filename='img/logo-trimmed.png')}}" /></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Our Partner</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Login</a>
+          </li>
+          <li class="nav-item mr-sm-2">
+            <a class="btn btn-nav" href="/sign_up">Sign Up!</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row" style="margin-top:60px">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center" style="font-weight: bold">BUSINESS TITLE</h1>
+        </div>
+      </div>
+      <div class="row" id="img-slider" style="margin-top:30px">
+        <div class="col-md-6 offset-md-3">
+          <div class="w3-content w3-display-container">
+            <img class="mySlides img-responsive" src="http://imgstocks.com/wp-content/uploads/2013/11/Toocharger-com-img-graphiques-photos-nature-paysage-nature-72997-jpg.jpg">
+            <img class="mySlides img-responsive" src="http://img.wikinut.com/img/3r2wx5cgt8jj06eq/jpeg/0/Nature.jpeg">
+            <img class="mySlides img-responsive" src="http://www.intrawallpaper.com/static/images/1249912-nature-wallpapers-for-desktop.jpg">
+            <div class="w3-center w3-display-bottommiddle" style="width:100%">
+              <div class="w3-left" onclick="plusDivs(-1)" style="color:white">&#10094;</div>
+              <div class="w3-right" onclick="plusDivs(1)" style="color:white">&#10095;</div>
+              <span class="w3-badge demo w3-border" onclick="currentDiv(1)"></span>
+              <span class="w3-badge demo w3-border" onclick="currentDiv(2)"></span>
+              <span class="w3-badge demo w3-border" onclick="currentDiv(3)"></span>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          var slideIndex = 1;
+          showDivs(slideIndex);
+
+          function plusDivs(n) {
+            showDivs(slideIndex += n);
+          }
+
+          function currentDiv(n) {
+            showDivs(slideIndex = n);
+          }
+
+          function showDivs(n) {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            if (n > x.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = x.length}
+            for (i = 0; i < x.length; i++) {
+               x[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+               dots[i].className = dots[i].className.replace(" w3-white", "");
+            }
+            x[slideIndex-1].style.display = "flex";  
+            dots[slideIndex-1].className += " w3-white";
+           }        
+         </script>
+      </div>
+      <div class="row" style="margin-top:20px">
+        <div class="col-md-8 offset-md-2">
+          <h4>Description</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+      <div class="row" style="margin-top:20px">
+        <div class="col-md-8 offset-md-2">
+          <h4>Tags</h4>
+          <span class="btn btn-nav btn-tags">Arts</span>
+          <span class="btn btn-nav btn-tags">Industry</span>
+          <span class="btn btn-nav btn-tags">Automaton</span>
+          <span class="btn btn-nav btn-tags">Technology</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8 offset-md-2" style="margin-top: 30px">
+          <h4>Seller Contacts</h4>
+          <p>email : loremipsum@dolorsitamet.com</br>
+          phone : +62981293709541</br>
+          Line  : LoremIpsum</p>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-md-8 offset-md-2" style="margin-bottom: 30px">
+          <h4>Share via:</h4>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
