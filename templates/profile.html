@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   </head>
   <style>
+    
     .container{
       background-color: white;
     }
@@ -69,6 +70,12 @@
       background-color: rgba(0,0,0,0.5);
       color:white; 
     }
+    .logged-in{
+      display:{{logged_in}};
+    }
+    .not-logged-in{
+      display:{{not_logged_in}};
+    }
     @media only screen and (max-width: 900px){
       .mySlides {
         display:none;
@@ -92,16 +99,19 @@
             <a class="nav-link" href="/">Our Partner</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Category</a>
+            <a class="nav-link" href="/category">Category</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/profile">Explore</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Login</a>
+          <li class="nav-item not-logged-in">
+            <a class="nav-link" href="/login">Login</a>
           </li>
-          <li class="nav-item mr-sm-2">
+          <li class="nav-item mr-sm-2 not-logged-in">
             <a class="btn btn-nav" href="/sign_up">Sign Up!</a>
+          </li>
+          <li class="nav-item mr-sm-2 logged-in">
+            <a href="/sign_up"><img style="height:30px" src="https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-512.png" class="img-responsive"/></a>
           </li>
         </ul>
       </div>

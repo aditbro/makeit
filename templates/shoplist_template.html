@@ -23,21 +23,22 @@
     .container{
       margin-top:80px;
     }
-    body{
-      background-image: url("{{url_for('static',filename='img/background-white.jpg')}}");
-      background-repeat: no-repeat;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover; 
-      background-attachment: fixed;
-    }
     a{
       color:black;
     }
     /*nav:hover{
       background-color: rgba(0,0,0,0.3);
     }*/
+    body{
+      background-image: url("https://ak4.picdn.net/shutterstock/videos/16716424/thumb/1.jpg");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:95vh;
+    }
     nav{
       background-color: rgba(0,0,0,0.6);
     }
@@ -57,13 +58,18 @@
       background-color: #047564;
       color:white;
     }
-
-    h1{
-      color:black;
-      font-weight: bold;
-    }
     p {
       color:black;
+    }
+    .img-cat{
+        width:100%; 
+    }
+    .cat{
+        margin:20px;
+        padding-bottom:20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 5px 5px rgba(0,0,0,0.5);
     }
     .logged-in{
       display:{{logged_in}};
@@ -77,21 +83,18 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center">ABOUT US</h1>
+          <h2 class="text-center">{{category}} Shop</h2>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <img src="{{url_for('static',filename='img/logo-trimmed.png')}}" class="img-responsive">
+      <div class="row" style="margin-top:60px">
+        {%for shop in shops%}
+        <div class="col-md-3">
+          <a href="/category/{{category}}/{{shop[0].name}}">
+          <img class="img-responsive img-cat" src="{{url_for('static',filename=shop[2].dir[9:])}}">
+          <h5 class="text-center">{{shop[0].name}}</h5>
+        </a>        
         </div>
-        <div class="col-md-4">
-          <h2 class="text-center">VISION</h2>
-          <p>Make It Happen ITB Business Platform brings innovation to publish ITB student’s startups in various sectors and open opportunity to expand their businesses in a way to increase their rate of selling.</p>
-        </div>
-        <div class="col-md-4">
-          <h2 class="text-center">MISSION</h2>
-          <p>We publish and promote ITB startups and make it executable. Not only to increase their popularity to become wider-known by public, this website can also ease the purchasing process by giving easier way for customer to contact directly to the sellers and giving special discount to reach customer’s convenience, trust and practical way in online shopping.</p>
-        </div>
+        {%endfor%}
       </div>
     </div>
   </body>

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/custom.js')}}"></script>
@@ -16,6 +17,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   </head>
   <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
     /*body{
       background-image: url("{{url_for('static',filename='img/city-sunrise.png')}}");
       background-repeat: no-repeat;
@@ -99,6 +103,12 @@
       background-color: rgba(0,0,0,0.5);
       color:white;
     }
+    .logged-in{
+      display:{{logged_in}};
+    }
+    .not-logged-in{
+      display:{{not_logged_in}};
+    }
     @media only screen and (max-width: 900px){
       .text-desktop{
         display:none;
@@ -106,34 +116,7 @@
     }
   </style>
   <body style="">
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
-      <a href="#" class="navbar-brand" style="font-family: 'Farsan', cursive;"><img id="logo" src="{{url_for('static', filename='img/logo-trimmed.png')}}" /></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Our Partner</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Category</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">Explore</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Login</a>
-          </li>
-          <li class="nav-item mr-sm-2">
-            <a class="btn btn-nav" href="/sign_up">Sign Up!</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    {{nav|safe}}
     <div class="container-fluid">
         <div class="slide row w3-animate-right" id="main" style="font-family: 'Roboto Condensed', sans-serif;">
             <!--<div class="col-md-6 offset-md-3" style="color:white; padding-left:5%; margin-top:100px">-->
