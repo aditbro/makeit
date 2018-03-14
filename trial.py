@@ -58,7 +58,7 @@ session = DBSession()
 #Login manager init
 #########################################################
 login_manager = flask_login.LoginManager()
-
+login_manager.init_app(app)
 class Users(flask_login.UserMixin):
 	def __init__(self, U):
 		self.id = U.username
