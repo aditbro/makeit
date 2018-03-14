@@ -14,26 +14,31 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/fadeslideshow.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery.touchSwipe.min.js')}}"></script> 
   </head>
   <style>
     *{
         font-family: 'Montserrat', sans-serif !important;
     }
     .container{
-      margin-top:80px;
+      background-color: white;
     }
-    body{
-      background-image: url("{{url_for('static',filename='img/background-white.jpg')}}");
-      background-repeat: no-repeat;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover; 
-      background-attachment: fixed;
+    body {
+      background-color: rgb(230,230,230)
     }
     a{
       color:black;
+    }
+    .w3-left, .w3-right, .w3-badge {
+      cursor:pointer
+    }
+    .w3-badge {
+      height:13px;
+      width:13px;
+      padding:0
     }
     /*nav:hover{
       background-color: rgba(0,0,0,0.3);
@@ -57,13 +62,14 @@
       background-color: #047564;
       color:white;
     }
-
-    h1{
+    .btn-tags{
       color:black;
-      font-weight: bold;
+      -webkit-transition:0.2s;
     }
-    p {
-      color:black;
+    .btn-tags:hover{
+      border-color: transparent;
+      background-color: rgba(0,0,0,0.5);
+      color:white; 
     }
     .logged-in{
       display:{{logged_in}};
@@ -71,26 +77,49 @@
     .not-logged-in{
       display:{{not_logged_in}};
     }
+    #fadeshow1 {
+      width:100%;
+      height:auto;
+    }
+    .galleryplayer{
+      width:100%;
+      height:auto;
+    }
+    img{
+      width:100%;
+      height:auto;
+    }
   </style>
   <body>
     {{nav|safe}}
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="text-center">ABOUT US</h1>
+      <div class="row" style="margin-top:60px">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center" style="font-weight: bold">{{title}}</h1>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4">
-          <img src="{{url_for('static',filename='img/logo-trimmed.png')}}" class="img-responsive">
+      <script type="text/javascript">
+            var mygallery = new fadeSlideShow({
+              wrapperid: "fadeshow1", //ID of blank DIV on page to house Slideshow
+              dimensions: ['100%', 600], //width/height of gallery in pixels. Should reflect dimensions of largest image
+              imagearray: [
+                {{photos | safe}} //<--no trailing comma after very last image element!
+              ],
+              displaymode: {type:'auto', pause:2000, cycles:0, wraparound:false},
+              persist: false, //remember last viewed slide and recall within same session?
+              fadeduration: 500, //transition duration (milliseconds)
+              descreveal: "always",
+              togglerid: ""
+            })
+      </script>
+      <div class="row" style="margin-top:30px;padding-bottom: 40px">
+        <div class="col-md-5 offset-md-1">
+          <div id="fadeshow1">
+
+          </div>
         </div>
-        <div class="col-md-4">
-          <h2 class="text-center">VISION</h2>
-          <p>Make It Happen ITB Business Platform brings innovation to publish ITB student’s startups in various sectors and open opportunity to expand their businesses in a way to increase their rate of selling.</p>
-        </div>
-        <div class="col-md-4">
-          <h2 class="text-center">MISSION</h2>
-          <p>We publish and promote ITB startups and make it executable. Not only to increase their popularity to become wider-known by public, this website can also ease the purchasing process by giving easier way for customer to contact directly to the sellers and giving special discount to reach customer’s convenience, trust and practical way in online shopping.</p>
+        <div class="col-md-6">
+          {{content | safe}}
         </div>
       </div>
     </div>

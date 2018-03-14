@@ -7,19 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  </head>
-  <style>
+  </head>  <style>
     body {
       background-color: rgb(230,230,230)
     }
     h1 {
       color:black;
+    }
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    #output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
     }
     .row{
       margin-top:10px;
@@ -32,7 +41,7 @@
           <h1 class="text-center">Join Us And Be A Seller!</h1>
         </div>
       </div>
-      <form class="form-group">
+      <form class="form-group" method="POST" enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-6 offset-md-3" style="margin-top:20px">
             <label>Full Name</label>
@@ -83,19 +92,81 @@
         </div>
         <div class="row">
           <div class="col-md-6 offset-md-3" style="margin-top:20px">
+            <h4>Account Information</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 offset-md-3">
+            <label>username</label>
+            <input type="text" name="username" class="form-control" required>
+          </div>
+          <div class="col-md-2">
+            <label>password</label>
+            <input type="password" name="password" id="pass" class="form-control" required>
+          </div>
+          <div class="col-md-2">
+            <label>confirm password</label>
+            <input type="password" name="password_val" id="pass_val" class="form-control" required>
+            <label id="not_match" style="display:none">your password does not match</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 offset-md-3">
+            <label>Company Photo</label>
+            <input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile(event)" required>
+            <p>max size : 6 MB</p>
+          </div>
+          <div class="cold-md-3">
+            <img id="output">
+            <script>
+              var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+              };
+            </script>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3" style="margin-top:20px">
             <h4>Terms and Conditions</h4>
             <p>To continue, please make sure that:</p>
             <lu>
               <li>You are committed in this program.</li>
-              <li>Your product data should be submitted through email according to seller requirements in the PDF below.</li>
               <li>You agree to this platform terms and condition.</li>
             </ui>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3 offset-md-3">
-            <button type="submit" class="btn">Submit</button>
+            <button id="btnsubmit" type="button" class="btn">Submit</button>
+            <button type="submit" id="SUBMITS" style="display:none"></button>
           </div>
+          <script type="text/javascript">
+              var form = document.getElementById('forms');
+
+              function validateForm() {
+                var isValid = true;
+                $('input').each(function() {
+                  if ( $(this).val() === '' ){
+                    isValid = false;
+                  }
+                });
+                return isValid;
+              }
+
+              document.getElementById("btnsubmit").addEventListener("click", function () {
+                if(true){
+                  var pass = $('#pass').val();
+                  var pass_val = $('#pass_val').val();
+                  if(pass === pass_val){
+                    document.getElementById("SUBMITS").click()
+                  }else{
+                    document.getElementById("not_match").style.display = "flex";
+                    document.getElementsByName("password").style.borderColor= "red";
+                  }
+                }
+              });
+            </script>
         </div>
       </form>
     </div>

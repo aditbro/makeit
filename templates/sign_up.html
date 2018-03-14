@@ -7,14 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   </head>
   <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
     body {
       background-color: rgb(230,230,230)
     }
@@ -47,7 +52,7 @@
           <h1 class="text-center">SIGN UP AND JOIN US!</h1>
         </div>
       </div>
-      <form class="form-group">
+      <form class="form-group" id="forms" method="POST" enctype=multipart/form-data>
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <label>Full Name</label>
@@ -57,7 +62,7 @@
         <div class="row">
           <div class="col-md-2 offset-md-3">
             <label>Gender</label>
-            <select class="form-control" name="gender">
+            <select class="form-control" name="gender" required>
               <option></option>
               <option>Male</option>
               <option>Female</option>
@@ -65,23 +70,23 @@
           </div>
           <div class="col-md-4">
             <label>Date Of Birth</label>
-            <input type="date" name="lahir" class="form-control" value="2018-01-01">
+            <input type="date" name="lahir" class="form-control" value="2018-01-01" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <label>Address</label>
-            <input type="text" name="address" class="form-control" placeholder="Jl.Cisitu Lama XX No.XX, Kecamatan Coblong, Bandung">
+            <input type="text" name="address" class="form-control" placeholder="Jl.Cisitu Lama XX No.XX, Kecamatan Coblong, Bandung" required>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3 offset-md-3">
             <label>Phone Number</label>
-            <input type="number" name="phone" class="form-control">
+            <input type="number" name="phone" class="form-control" required>
           </div>
           <div class="col-md-3">
             <label>email address</label>
-            <input type="email" name="email" class="form-control">
+            <input type="email" name="email" class="form-control" required>
           </div>
         </div>
         <div class="row">
@@ -92,21 +97,23 @@
         <div class="row">
           <div class="col-md-2 offset-md-3">
             <label>username</label>
-            <input type="text" name="username" class="form-control">
+            <input type="text" name="username" class="form-control" required>
           </div>
           <div class="col-md-2">
             <label>password</label>
-            <input type="password" name="password" class="form-control">
+            <input type="password" name="password" id="pass" class="form-control" required>
           </div>
           <div class="col-md-2">
             <label>confirm password</label>
-            <input type="password" name="password_val" class="form-control">
+            <input type="password" name="password_val" id="pass_val" class="form-control" required>
+            <label id="not_match" style="display:none">your password does not match</label>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3 offset-md-3">
             <label>Photo</label>
-            <input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile(event)">
+            <input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile(event)" required>
+            <p>max size : 6 MB</p>
           </div>
           <div class="cold-md-3">
             <img id="output">
@@ -125,7 +132,34 @@
         </div>
         <div class="row">
           <div class="col-md-3 offset-md-3">
-            <button type="submit" class="btn">Submit</button>
+            <button id="btnsubmit" type="button" class="btn">Submit</button>
+            <button type="submit" id="SUBMITS" style="display:none"></button>
+            <script type="text/javascript">
+              var form = document.getElementById('forms');
+
+              function validateForm() {
+                var isValid = true;
+                $('input').each(function() {
+                  if ( $(this).val() === '' ){
+                    isValid = false;
+                  }
+                });
+                return isValid;
+              }
+
+              document.getElementById("btnsubmit").addEventListener("click", function () {
+                if(true){
+                  var pass = $('#pass').val();
+                  var pass_val = $('#pass_val').val();
+                  if(pass === pass_val){
+                    document.getElementById("SUBMITS").click()
+                  }else{
+                    document.getElementById("not_match").style.display = "flex";
+                    document.getElementsByName("password").style.borderColor= "red";
+                  }
+                }
+              });
+            </script>
           </div>
         </div>
       </form>

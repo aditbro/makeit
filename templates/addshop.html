@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{category}}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>            
+  </head>
+  <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    .output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+      display:block;
+    }
+    body {
+      background-color: rgb(230,230,230)
+    }
+    h1 {
+      color:black;
+    }
+    #output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+    }
+    .row{
+      margin-top:10px;
+    }
+    .nicEdit-main{
+      background-color: white;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Add A New Item</h1>
+        </div>
+      </div>
+      <form action="/shop/add" class="form-group" method="POST" enctype="multipart/form-data">
+      <div class="row"> 
+        <div class="col-md-6 offset-md-3"> 
+          <label>Item Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Item Name" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 offset-md-3">
+          <label>Describe the item</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3" id="white">
+          <textarea name="description" class="form-control" cols="40" style="width:100%; min-height:400px" required>
+            Don't forget to write down the price
+          </textarea><br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 offset-md-3" id="photo_input">
+          <label>Add Photo</label>
+          <p>you can add up to 5 photos of your product</p>
+          <input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile0(event)" required>
+          <p>max size : 6 MB</p>
+        </div>
+        <div class="cold-md-3">
+          <script>
+            var loadFile0 = function(event) {
+              var output = document.getElementById('output0');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+            var loadFile1 = function(event) {
+              var output = document.getElementById('output1');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+            var loadFile2 = function(event) {
+              var output = document.getElementById('output2');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+            var loadFile3 = function(event) {
+              var output = document.getElementById('output3');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+            var loadFile4 = function(event) {
+              var output = document.getElementById('output4');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-default" id="add_photo" type="button">Add Photo</button>
+          <img id="output0" class="output"/>
+          <img id="output1" class="output"/>
+          <img id="output2" class="output"/>
+          <img id="output3" class="output"/>
+          <img id="output4" class="output"/>
+          <script type="text/javascript">
+            var total = 1;
+            $("#add_photo").click(function(){
+                if(total < 7){
+                  $("#photo_input").append('<input type="file" name="photo" class="form-control" accept="image/*" onchange="loadFile'+total+'(event)" required>');
+                  total = total + 1;
+                }
+            });
+          </script>
+        </div>
+      </div>  
+      <div class="row">
+        <div class="col-md-3 offset-md-3">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </body>
+</html>

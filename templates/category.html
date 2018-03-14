@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MakeItHappen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    .container{
+      margin-top:80px;
+    }
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    body{
+      background-image: url("https://ak4.picdn.net/shutterstock/videos/16716424/thumb/1.jpg");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:95vh;
+    }
+    a{
+      color:black;
+    }
+    /*nav:hover{
+      background-color: rgba(0,0,0,0.3);
+    }*/
+    nav{
+      background-color: rgba(0,0,0,0.6);
+    }
+    #logo{
+      height:30px;
+      width:30px;
+    }
+    .btn-nav {
+      border-color: black;
+      background-color: transparent;
+      color:white;
+      -webkit-transition:0.5s;
+    }
+
+    .btn-nav:hover{
+      border-color: transparent;
+      background-color: #047564;
+      color:white;
+    }
+    p {
+      color:black;
+    }
+    .img-cat{
+        width:100%; 
+    }
+    .cat{
+        margin:20px;
+        padding-bottom:20px;
+        background-color: white;
+        border-radius: 0px;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        padding:0px !important;
+    }
+    .logged-in{
+      display:{{logged_in}};
+    }
+    .not-logged-in{
+      display:{{not_logged_in}};
+    }
+    </style>
+  <body>
+    {{nav|safe}}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Explore our various categories</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Arts">
+                <img src="https://images.fineartamerica.com/images-medium-large-5/hip-to-be-square-wendy-j-st-christopher.jpg" class="img-responsive img-cat">
+                <h2 class="text-center">Arts</h2>
+                </a>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Technology"> 
+                <img src="https://www.arm.com/-/media/global/products/security-on-arm/arm-trustzone-technology-for-microcontrollers-v2.jpg?revision=807901b4-6dee-48aa-bcb4-1ea9bea710a9&h=400&w=400&la=en&hash=2C608D418A937AB96327E833C0E5B968A11685D6" class="img-responsive img-cat">
+                <h2 class="text-center">Technology</h2>
+                </a>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Fashion">
+                <img src="http://thejeansblog.com/wp-content/uploads/2015/12/denim-fashion-inspiration-3.jpg" class="img-responsive img-cat">
+                <h2 class="text-center">Fashion</h2>
+                </a>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Food">
+                <img src="https://media1.popsugar-assets.com/files/thumbor/n0yP3KlLR0HrhwLup9bv-bYzNvU/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2015/10/30/797/n/37139775/09873d98_edit_img_image_38926273_1446168147/i/Latin-Inspired-Comfort-Food-Recipes.png" class="img-responsive img-cat">
+                <h2 class="text-center">Food</h2>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Beverages">
+                <img src="https://shop.pall.com/INTERSHOP/static/WFS/PALL-PALLUS-Site/-/PALL-PALLUS-pall-smb-responsive/en_US/subcategory-images/Juice.jpg" class="img-responsive img-cat">
+                <h2 class="text-center">Beverages</h2>
+                </a>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Beauty">
+                <img src="https://www.sigmabeauty.com/media/catalog/product/cache/fc7686c275f4426d6b255c9bb1b50d55/b/k/bk007_pdp01_1080x1080.jpg" class="img-responsive img-cat">
+                <h2 class="text-center">Beauty</h2>
+                </a>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Education">
+                <img src="data:image/png;base64,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" class="img-responsive img-cat">
+                </a>
+                <h2 class="text-center">Education</h2>
+            </div>
+            <div class="col-md-2 cat">
+                <a href="/category/Other">
+                <img src="https://www.garrettwade.com/media/catalog/product/cache/1/image/730x/0dc2d03fe217f8c83829496872af24a0/2/4/24B0101_11.jpg" class="img-responsive img-cat">
+                <h2 class="text-center">Other</h2>
+                </a>
+            </div>
+        </div>
+    </div>      
+  </body>
+</html>
