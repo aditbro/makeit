@@ -58,6 +58,7 @@ session = DBSession()
 #Login manager init
 #########################################################
 login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
 
 class Users(flask_login.UserMixin):
 	def __init__(self, U):
@@ -214,7 +215,6 @@ def daftar_seller():
 		while(session.query(ArticlePhoto).filter_by(dir=photodir).first() or session.query(ShopPhoto).filter_by(dir=photodir).first() or session.query(User).filter_by(photodir=photodir).first()):
 			photoname = str(1) + photoname
 			photodir =  os.path.join(app.config['UPLOAD_FOLDER'], photoname)
-			print(session.query(ArticlePhoto).filter_by(dir=photodir))
 		new_user = User(username,password,nama,email,gender,lahir,phone,address,photodir)
 		new_shop = Shop(name=company,user=username)
 		new_shoptag = ShopTag(name=company, tag=category)
@@ -249,7 +249,6 @@ def profile():
 		shop = [shops[0]]
 		i = 1
 		for comp in shops:
-			print(curr_shop,comp[1].title)
 			if(curr_shop == comp[1].title):
 				pass
 			else:
@@ -303,7 +302,6 @@ def showshop(category, shopss):
 		shop = [shops[0]]
 		i = 1
 		for comp in shops:
-			print(curr_shop,comp[1].title)
 			if(curr_shop == comp[1].title):
 				pass
 			else:
@@ -354,7 +352,6 @@ def shop():
 		shop = [shops[0]]
 		i = 1
 		for comp in shops:
-			print(curr_shop,comp[2].title)
 			if(curr_shop == comp[2].title):
 				pass
 			else:
@@ -423,8 +420,7 @@ def edit_shop(title):
 
 #main
 #########################################################
-if __name__ == '__main__':
-	app.secret_key = 'mendaki_gunung_melewati_lembah_ninja_hattori'
-	app.debug = True
-	login_manager.init_app(app)
-	app.run(host ='0.0.0.0', port=80)
+app.secret_key = str(os.urandom(10))
+app.debug = False
+login_manager.init_app(app)
+app.run(host ='0.0.0.0', port=80)
