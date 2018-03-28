@@ -499,6 +499,7 @@ def showshop(category, shopss):
 
 @app.route('/category/<category>/<shopss>/<item>', methods=['GET'])
 def showitem(category,shopss,item):
+	items = item
 	log_in = ''
 	not_log_in = ''
 	if(flask_login.current_user.is_authenticated):
@@ -516,7 +517,7 @@ def showitem(category,shopss,item):
 		else:
 			i = 1
 		photos += str('[\"'+url_for('static',filename=it[1].dir[9:])+'\"]')
-	return render_template('item.html',photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav.format('','','',''),logged_in=log_in,not_logged_in=not_log_in)
+	return render_template('item.html',item=items,photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav.format('','','',''),logged_in=log_in,not_logged_in=not_log_in)
 
 @app.route('/category/<category>/<shopss>/<item>/buy', methods=['GET','POST'])
 def buy(item,shopss,category):
