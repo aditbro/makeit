@@ -21,6 +21,12 @@ except ImportError:
 SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
+BUY_HEADER = 'Makeithappen.id order {}'
+BUY_MSG = '''<p>Request pembelian item {}</p></br>
+<p>oleh : {}</p></br>
+no telp : {}</p></br>
+email : {}</p></br>
+<p>dengan detail : {}</p>'''
 
 def get_credentials():
     """Gets valid user credentials from storage.
@@ -510,7 +516,34 @@ def showitem(category,shopss,item):
 		else:
 			i = 1
 		photos += str('[\"'+url_for('static',filename=it[1].dir[9:])+'\"]')
-	return render_template('item.html',photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav,logged_in=log_in,not_logged_in=not_log_in)
+	return render_template('item.html',photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav.format('','','',''),logged_in=log_in,not_logged_in=not_log_in)
+
+@app.route('/category/<category>/<shopss>/<item>/buy', methods=['GET','POST'])
+def buy(item,shopss,category):
+	log_in = ''
+	not_log_in = ''
+	if(flask_login.current_user.is_authenticated):
+		log_in = ''
+		not_log_in = 'none'
+	else:
+		log_in = 'none'
+		not_log_in = ''
+	if request.method == 'GET':
+		return render_template('buy.html',category=category,shopss=shopss,item=item,logged_in=log_in,not_logged_in=not_log_in)
+	else:
+		dest = session.query(Shop,User).filter_by(name=shopss).join(User).first()[1].email
+		header = BUY_HEADER.format(item)
+		nama_item = request.form['nama']
+		nama_buyer = request.form['name']
+		telp = request.form['telp']
+		email = request.form['email']
+		details = request.form['details']
+		message = BUY_MSG.format(nama_item,nama_buyer,telp,email,details)
+		message = create_message("me",dest,"MAKEITHAPPEN item order",message)
+		send_message(get_service(),"me",message)
+		return redirect(url_for('showitem',category=category,shopss=shopss,item=item))
+
+
 
 #Shop Item Function
 #########################################################
