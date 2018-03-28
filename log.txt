@@ -1,0 +1,67 @@
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Mar 19 14:53:13 2018] ***
+compiled with version: 5.4.0 20160609 on 16 March 2018 10:44:40
+os: Linux-4.4.0-1052-aws #61-Ubuntu SMP Mon Feb 12 23:05:58 UTC 2018
+nodename: ip-172-31-22-61
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 1
+current working directory: /home/ubuntu/makeit
+detected binary path: /usr/local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+your processes number limit is 3900
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5000 fd 3
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Python version: 3.5.2 (default, Nov 23 2017, 16:37:01)  [GCC 5.4.0 20160609]
+Python main interpreter initialized at 0x103be40
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+Traceback (most recent call last):
+  File "wsgi.py", line 1, in <module>
+    from trial import app
+  File "./trial.py", line 426, in <module>
+    app.run(host ='0.0.0.0', port=80)
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 841, in run
+    run_simple(host, port, self, **options)
+  File "/usr/local/lib/python3.5/dist-packages/werkzeug/serving.py", line 799, in run_simple
+    inner()
+  File "/usr/local/lib/python3.5/dist-packages/werkzeug/serving.py", line 759, in inner
+    fd=fd)
+  File "/usr/local/lib/python3.5/dist-packages/werkzeug/serving.py", line 651, in make_server
+    passthrough_errors, ssl_context, fd=fd)
+  File "/usr/local/lib/python3.5/dist-packages/werkzeug/serving.py", line 562, in __init__
+    HTTPServer.__init__(self, (host, int(port)), handler)
+  File "/usr/lib/python3.5/socketserver.py", line 440, in __init__
+    self.server_bind()
+  File "/usr/lib/python3.5/http/server.py", line 138, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/usr/lib/python3.5/socketserver.py", line 454, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1676)
+spawned uWSGI worker 1 (pid: 1678, cores: 2)
+spawned uWSGI worker 2 (pid: 1679, cores: 2)
+spawned uWSGI worker 3 (pid: 1680, cores: 2)
+spawned uWSGI worker 4 (pid: 1681, cores: 2)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.

@@ -423,4 +423,4 @@ def edit_shop(title):
 app.secret_key = str(os.urandom(10))
 app.debug = False
 login_manager.init_app(app)
-app.run(host ='0.0.0.0', port=80)
+app.run(host ='0.0.0.0', port=2000)
