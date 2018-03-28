@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MakeItHappen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    h5{
+      font-family: 'Roboto Condensed';
+    }
+    .container{
+      margin-top:80px;
+    }
+    a{
+      color:black;
+    }
+    /*nav:hover{
+      background-color: rgba(0,0,0,0.3);
+    }*/
+    body{
+      background-image: url("https://ak4.picdn.net/shutterstock/videos/16716424/thumb/1.jpg");
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover; 
+      background-attachment: fixed;
+      height:95vh;
+    }
+    nav{
+      background-color: rgba(0,0,0,0.6);
+    }
+    #logo{
+      height:30px;
+      width:30px;
+    }
+    .btn-nav {
+      border-color: black;
+      background-color: white;
+      color:black;
+      -webkit-transition:0.5s;
+    }
+
+    .btn-nav:hover{
+      border-color: transparent;
+      background-color: #047564;
+      color:white;
+    }
+    p {
+      color:black;
+    }
+    .img-cat{
+        width:100%; 
+    }
+    .cat{
+        margin:20px;
+        padding-bottom:20px;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 5px 5px rgba(0,0,0,0.5);
+    }
+    h1{
+        color:black;
+    }
+    .logged-in{
+      display:{{logged_in}};
+    }
+    .not-logged-in{
+      display:{{not_logged_in}};
+    }
+  </style>
+  <body>
+    {{nav|safe}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">{{main.name}}</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-md-2">
+          <img src="{{url_for('static',filename=main.photodir[9:])}}" class="img-responsive text-center" style="width:100%;height:auto">
+        </div>
+        <div class="col-md-4">
+          <p>name = {{main.name}}</p>
+          <p>username = {{main.username}}</p>
+          <p>email = {{main.email}}</p>
+          <p>gender = {{main.gender}}</p>
+          <p>birth date = {{main.birth_date}}</p>
+          <p>phone number = {{main.phone_number}}</p>
+          <p>address = {{main.address}}</p>
+          <div>
+            <a href="/prof/edit" style="display:inline"><button class="btn btn-primary">Edit Info</button></a>
+            <a href="/prof/pass" style="display:inline"><button class="btn btn-success">Edit Password</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
