@@ -20,56 +20,63 @@
     *{
         font-family: 'Montserrat', sans-serif !important;
     }
-    body{
-      background-image: url("{{url_for('static',filename='img/city-sunrise.png')}}");
-      background-repeat: no-repeat;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover; 
-      background-attachment: fixed;
-      height:100vh;
+    body {
+      background-color: rgb(230,230,230)
     }
-    .main{
-      position:fixed;
-      top: 50%;
-      left: 50%;
-      width:20em;
-      height:18em;
-      margin-top: -10em; /*set to a negative number 1/2 of your height*/
-      margin-left: -10em; /*set to a negative number 1/2 of your width*/
-      background-color: rgba(255,255,255,1);
-      padding:10px;
+    h1, h2{
+      color:black;
     }
-    input {
-      margin-top:1em;
+
+    h2{
+      margin-top:20px;
     }
-    #logo{
-      position:fixed;
-      height:50px;
-      width:50px;
-      left:50%;
-      margin-left:-25px;
+
+    .row{
+      margin-top:10px;
     }
+
+    #output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+    }
+
     .btn{
-      margin-top: 10px;
-      width:280px;
-      background-color: rgb(26, 88, 188);
-      color:white;
-    }
-    #first-input{
-      margin-top: 60px;
+      margin-top:20px;
     }
   </style>
   <body>
-    <form action="/login" method="POST">
-    <div class="main">
-      <img id="logo" src="{{url_for('static', filename='img/logo-trimmed.png')}}" align="middle"/>
-      <input class="form-control" id="first-input" style="border:1px solid #000000" type="text" name="username" placeholder="username">
-      <input class="form-control" style="border:1px solid #000000" type="password" name="password" placeholder="password">
-      <button type="submit" class="btn btn-submit">Log in</button>
-      {{err_msg | safe}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center">{{main.username}} Password</h1>
+        </div>
+      </div>
+      <form action="/prof/pass" method="POST">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>Old Password</label>
+            <input type="password" name="old_pass" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>New Password</label>
+            <input type="password" name="new_pass" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>Re-enter New Password</label>
+            <input type="password" name="" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <button class="btn btn-primary" style="width:100%">Save Change</button>
+          </div>
+        </div>
+      </form>
     </div>
-    </form>
   </body>
 </html>

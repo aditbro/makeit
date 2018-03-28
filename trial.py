@@ -1,3 +1,109 @@
+from __future__ import print_function
+import httplib2
+import os
+import base64
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from apiclient import discovery
+from oauth2client import client
+from oauth2client import tools
+from oauth2client.file import Storage
+
+try:
+    import argparse
+    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
+except ImportError:
+    flags = None
+
+# If modifying these scopes, delete your previously saved credentials
+# at ~/.credentials/gmail-python-quickstart.json
+SCOPES = 'https://mail.google.com/'
+CLIENT_SECRET_FILE = 'client_secret.json'
+APPLICATION_NAME = 'Gmail API Python Quickstart'
+BUY_HEADER = 'Makeithappen.id order {}'
+BUY_MSG = '''<p>Request pembelian item {}</p></br>
+<p>oleh : {}</p></br>
+no telp : {}</p></br>
+email : {}</p></br>
+<p>dengan detail : {}</p>'''
+
+def get_credentials():
+    """Gets valid user credentials from storage.
+
+    If nothing has been stored, or if the stored credentials are invalid,
+    the OAuth2 flow is completed to obtain the new credentials.
+
+    Returns:
+        Credentials, the obtained credential.
+    """
+    '''home_dir = os.path.expanduser('~')
+    credential_dir = os.path.join(home_dir, '.credentials')
+    if not os.path.exists(credential_dir):
+        os.makedirs(credential_dir)
+    credential_path = os.path.join(credential_dir,
+                                   'gmail-python-quickstart.json')'''
+    credential_path = './gmail-python-quickstart.json'
+
+    store = Storage(credential_path)
+    credentials = store.get()
+    if not credentials or credentials.invalid:
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+        flow.user_agent = APPLICATION_NAME
+        if flags:
+            credentials = tools.run_flow(flow, store, flags)
+        else: # Needed only for compatibility with Python 2.6
+            credentials = tools.run(flow, store)
+        print('Storing credentials to ' + credential_path)
+    return credentials
+
+def get_service():
+  credentials = get_credentials()
+  http = credentials.authorize(httplib2.Http())
+  service = discovery.build('gmail','v1',http=http)
+  return service
+
+def create_message(sender, to, subject, message_text):
+  """Create a message for an email.
+
+  Args:
+    sender: Email address of the sender.
+    to: Email address of the receiver.
+    subject: The subject of the email message.
+    message_text: The text of the email message.
+
+  Returns:
+    An object containing a base64url encoded email object.
+  """
+  message = MIMEMultipart('alternative')
+  message.attach(MIMEText(message_text,'html'))
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+
+def send_message(service, user_id, message):
+  """Send an email message.
+
+  Args:
+    service: Authorized Gmail API service instance.
+    user_id: User's email address. The special value "me"
+    can be used to indicate the authenticated user.
+    message: Message to be sent.
+
+  Returns:
+    Sent Message.
+  """
+  try:
+    message = (service.users().messages().send(userId=user_id, body=message)
+               .execute())
+    #print 'Message Id: %s' % message['id']
+    return message
+  except Exception as e:
+    #print 'An error occurred: %s' % error
+    print(e)
+
+
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 app = Flask(__name__)
 import flask_login
@@ -8,6 +114,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import User, Article, ShopPhoto, ShopTag, Tags, Base, Shop, ArticlePhoto
 from werkzeug.utils import secure_filename
+from flask_mail import Mail, Message
 
 #HTML TEMPLATE
 #########################################################
@@ -21,9 +128,7 @@ nav = '''<nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-conte
           <li class="nav-item">
             <a class="nav-link {}" href="/about">About Us</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {}" href="/">Our Partner</a>
-          </li>
+          {}
           <li class="nav-item">
             <a class="nav-link {}" href="/category">Category</a>
           </li>
@@ -39,6 +144,7 @@ nav = '''<nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-conte
           <div class="dropdown show logged-in">
             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="height:30px;width:auto" src="https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-512.png" class="img-responsive"/></a><span class="caret"></span>
             <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="menu1">
+              <a class="dropdown-item" href="/prof">Profile</a>
               <a class="dropdown-item" href="/shop">Shop</a>
               <a class="dropdown-item" href="/logout">Logout</a>
             </div>
@@ -59,7 +165,6 @@ session = DBSession()
 #########################################################
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
-
 class Users(flask_login.UserMixin):
 	def __init__(self, U):
 		self.id = U.username
@@ -82,6 +187,13 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Mail config (must be before mail init!)
+app.config['MAIL_DEFAULT_SENDER'] = ("Tester", "foo@bar.baz")
+app.config['MAIL_DEBUG'] = True
+
+# Mail init
+mail = Mail(app)
 
 #Users class to handle login and session
 #########################################################
@@ -154,6 +266,78 @@ def about():
 	return render_template('about.html',logged_in=log_in,not_logged_in=not_log_in, nav=nav.format('active','','',''))
 
 
+#profile page
+#########################################################
+@app.route('/prof', methods = ['GET','POST'])
+@flask_login.login_required
+def prof():
+	log_in = ''
+	not_log_in = ''
+	if(flask_login.current_user.is_authenticated):
+		log_in = ''
+		not_log_in = 'none'
+	else:
+		log_in = 'none'
+		not_log_in = ''
+	username = flask_login.current_user.username
+	main = session.query(User).filter_by(username=username).first()
+	return render_template('prof.html', logged_in=log_in,not_logged_in=not_log_in, nav=nav.format('','','',''),main=main)
+
+#Edit profile page
+#########################################################
+@app.route('/prof/edit', methods=['GET','POST'])
+@flask_login.login_required
+def editprof():
+	log_in = ''
+	not_log_in = ''
+	if(flask_login.current_user.is_authenticated):
+		log_in = ''
+		not_log_in = 'none'
+	else:
+		log_in = 'none'
+		not_log_in = ''
+	if request.method == 'GET':
+		username = flask_login.current_user.username
+		main = session.query(User).filter_by(username=username).first()
+		return render_template('editprof.html', logged_in=log_in,not_logged_in=not_log_in, nav=nav.format('','','',''),main=main)
+	elif request.method == 'POST':
+		username = flask_login.current_user.username
+		main = session.query(User).filter_by(username=username).first()
+		main.email = request.form['email']
+		main.name = request.form['name']
+		main.gender = request.form['gender']
+		main.birth_date = request.form['birth_date']
+		main.phone_number = request.form['phone_number']
+		main.address = request.form['address']
+		session.commit()
+		return redirect(url_for('prof'))
+
+#Edit password
+#########################################################
+@app.route('/prof/pass', methods=['GET','POST'])
+@flask_login.login_required
+def editpass():
+	log_in = ''
+	not_log_in = ''
+	if(flask_login.current_user.is_authenticated):
+		log_in = ''
+		not_log_in = 'none'
+	else:
+		log_in = 'none'
+		not_log_in = ''
+	if request.method == 'GET':
+		username = flask_login.current_user.username
+		main = session.query(User).filter_by(username=username).first()
+		return render_template('editpass.html', logged_in=log_in,not_logged_in=not_log_in, nav=nav.format('','','',''),main=main)
+	elif request.method == 'POST':
+		old_pass = request.form['old_pass']
+		new_pass = request.form['new_pass']
+		main = session.query(User).filter_by(username=flask_login.current_user.username).first()
+		if(main.verify_password(old_pass)):
+			main.password = bcrypt.encrypt(new_pass)
+			session.commit()
+		else:
+			return('wrong password')
 #sign up page
 #########################################################
 @app.route('/sign_up', methods = ['GET','POST'])
@@ -255,7 +439,7 @@ def profile():
 				curr_shop = comp[1].title
 				shop.append([comp[0],comp[1],comp[2],comp[3]])
 			i += 1
-	return render_template('shoplisted_profile.html',company="Explore",shops=shop,nav=nav.format('','','active',''),logged_in=log_in,not_logged_in=not_log_in,category=category)
+	return render_template('shoplisted_profile.html',company="Explore",shops=shop,nav=nav.format('','','','active'),logged_in=log_in,not_logged_in=not_log_in,category=category)
 
 
 #category
@@ -312,6 +496,7 @@ def showshop(category, shopss):
 
 @app.route('/category/<category>/<shopss>/<item>', methods=['GET'])
 def showitem(category,shopss,item):
+	items = item
 	log_in = ''
 	not_log_in = ''
 	if(flask_login.current_user.is_authenticated):
@@ -329,7 +514,34 @@ def showitem(category,shopss,item):
 		else:
 			i = 1
 		photos += str('[\"'+url_for('static',filename=it[1].dir[9:])+'\"]')
-	return render_template('item.html',photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav,logged_in=log_in,not_logged_in=not_log_in)
+	return render_template('item.html',item=items,photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav.format('','','',''),logged_in=log_in,not_logged_in=not_log_in)
+
+@app.route('/category/<category>/<shopss>/<item>/buy', methods=['GET','POST'])
+def buy(item,shopss,category):
+	log_in = ''
+	not_log_in = ''
+	if(flask_login.current_user.is_authenticated):
+		log_in = ''
+		not_log_in = 'none'
+	else:
+		log_in = 'none'
+		not_log_in = ''
+	if request.method == 'GET':
+		return render_template('buy.html',category=category,shopss=shopss,item=item,logged_in=log_in,not_logged_in=not_log_in)
+	else:
+		dest = session.query(Shop,User).filter_by(name=shopss).join(User).first()[1].email
+		header = BUY_HEADER.format(item)
+		nama_item = request.form['nama']
+		nama_buyer = request.form['name']
+		telp = request.form['telp']
+		email = request.form['email']
+		details = request.form['details']
+		message = BUY_MSG.format(nama_item,nama_buyer,telp,email,details)
+		message = create_message("me",dest,"MAKEITHAPPEN item order",message)
+		send_message(get_service(),"me",message)
+		return redirect(url_for('showitem',category=category,shopss=shopss,item=item))
+
+
 
 #Shop Item Function
 #########################################################
@@ -417,6 +629,13 @@ def edit_shop(title):
 			item = session.query(Article).filter_by(title=title).first()
 			description = item.content
 			return render_template('editshop.html',title=title,description=description)
+
+# Actual testing
+@app.route('/mail_test')
+def send_test_mail():
+	kirim = create_message('Test', 'aditya.farizki1@gmail.com', 'PEMINJAMAN MEJA', "email testing")
+	send_message(get_service(),"me",kirim)
+	return "check email"
 
 #main
 #########################################################

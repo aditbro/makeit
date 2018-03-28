@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Buy</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>            
+  </head>
+  <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    .output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+      display:block;
+    }
+    body {
+      background-color: rgb(230,230,230)
+    }
+    h1 {
+      color:black;
+    }
+    #output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+    }
+    .row{
+      margin-top:10px;
+    }
+    .nicEdit-main{
+      background-color: white;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Get The Thing You Want!</h1>
+        </div>
+      </div>
+      <form action="/category/{{category}}/{{shopss}}/{{item}}/buy" class="form-group" method="POST" enctype="multipart/form-data">
+      <div class="row"> 
+        <div class="col-md-6 offset-md-3"> 
+          <label>Item Name</label>
+          <input type="text" name="nama" class="form-control" value="{{item}}" readonly>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-6 offset-md-3"> 
+          <label>Buyer Name</label>
+          <input type="text" name="name" class="form-control" placeholder="nama pemesan" required>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-6 offset-md-3"> 
+          <label>No telp</label>
+          <input type="number" name="telp" class="form-control" placeholder="081234567899" required>
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-6 offset-md-3"> 
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" placeholder="mail@gmail.com">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 offset-md-3">
+          <label>Keterangan pesanan</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3" id="white">
+          <textarea name="details" class="form-control" cols="40" style="width:100%; min-height:400px" required>
+          </textarea><br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 offset-md-3">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </body>
+</html>

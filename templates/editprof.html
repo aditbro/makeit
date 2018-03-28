@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <title>MakeItHappen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/custom.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/jquery.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/custom.js')}}"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Farsan|Roboto+Condensed" rel="stylesheet"> 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    *{
+        font-family: 'Montserrat', sans-serif !important;
+    }
+    body {
+      background-color: rgb(230,230,230)
+    }
+    h1, h2{
+      color:black;
+    }
+
+    h2{
+      margin-top:20px;
+    }
+
+    .row{
+      margin-top:10px;
+    }
+
+    #output{
+      max-height:250px;
+      max-width:150px;
+      margin-top:10px;
+    }
+
+    .btn{
+      margin-top:20px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <h1 class="text-center">{{main.username}} Profile</h1>
+        </div>
+      </div>
+      <form action="/prof/edit" method="POST">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>name</label>
+            <input type="text" name="name" class="form-control" value="{{main.name}}" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>email</label>
+            <input type="email" name="email" class="form-control" value="{{main.email}}" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 offset-md-3">
+            <label>Gender</label>
+            <select class="form-control" name="gender" required>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label>Birthdate</label>
+            <input type="date" class="form-control" name="birth_date" value="{{main.birth_date}}" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>Address</label>
+            <input type="text" name="address" class="form-control" value="{{main.address}}" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <label>Phone Number</label>
+            <input type="text" name="phone_number" class="form-control" value="{{main.phone_number}}" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <button class="btn btn-primary" style="width:100%">Save Change</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
