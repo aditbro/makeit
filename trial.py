@@ -116,6 +116,8 @@ from database_setup import User, Article, ShopPhoto, ShopTag, Tags, Base, Shop, 
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 
+visitor = 219
+
 #HTML TEMPLATE
 #########################################################
 nav = '''<nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
@@ -210,6 +212,8 @@ def user_loader(username):
 #########################################################
 @app.route('/', methods = ['GET','POST'])
 def mainpage():
+	global visitor 
+	visitor += 1
 	log_in = ''
 	not_log_in = ''
 	if(flask_login.current_user.is_authenticated):
@@ -225,6 +229,7 @@ def mainpage():
 #########################################################
 @app.route('/login', methods=['GET','POST'])
 def login():
+	visitor += 1
 	err = ''
 	if request.method == 'POST':
 		username = request.form['username']
@@ -629,6 +634,20 @@ def edit_shop(title):
 			item = session.query(Article).filter_by(title=title).first()
 			description = item.content
 			return render_template('editshop.html',title=title,description=description)
+
+# Statistical Data
+#########################################################
+@app.route('/stat', methods=['GET'])
+def statistic():
+	user = session.query(User).all()
+	shop = session.query(Shop,Article).join(Article).all()
+	count_shop = len(shop)
+	count_user = len(user)
+	listShop = ""
+	for i in shop:
+		print(i)
+		listShop += "<tr><td>"+i[0].name+"</td><td>"+i[1].date_created+"</td></tr>"
+	return render_template('stat.html',count_shop = count_shop, count_user = count_user, visitor = visitor, listShop = listShop)
 
 # Actual testing
 @app.route('/mail_test')
