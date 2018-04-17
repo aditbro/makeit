@@ -386,6 +386,7 @@ def daftar():
 #########################################################
 @app.route('/be_a_seller', methods = ['GET','POST'])
 def daftar_seller():
+	error = ''
 	if request.method == 'POST':
 		nama = request.form['nama']
 		gender = request.form['gender']
@@ -399,6 +400,8 @@ def daftar_seller():
 		category = request.form['category']
 		company = request.form['company']
 		photoname = secure_filename(photo.filename)
+		if(session.query(User).filter_by(username=username).all()):
+			return render_template('be_a_seller.html',error='username has already existed')
 		if(not allowed_file(photoname)):
 			return ('photo type is not allowed')
 		photodir =  os.path.join(app.config['UPLOAD_FOLDER'], photoname)
@@ -417,7 +420,7 @@ def daftar_seller():
 		photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
 		return(redirect(url_for('login')))
 	else:
-		return render_template('be_a_seller.html')
+		return render_template('be_a_seller.html',error=error)
 
 
 #profile
