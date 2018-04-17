@@ -229,6 +229,7 @@ def mainpage():
 #########################################################
 @app.route('/login', methods=['GET','POST'])
 def login():
+	global visitor
 	visitor += 1
 	err = ''
 	if request.method == 'POST':
