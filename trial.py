@@ -344,6 +344,27 @@ def editpass():
 			session.commit()
 		else:
 			return('wrong password')
+
+#Delete Account
+#########################################################
+@app.route('/prof/Delete', methods=['GET','POST'])
+@flask_login.login_required
+def delAcc():
+	if request.method == 'GET':
+		return render_template('DelAcc.html',username=flask_login.current_user.username)
+	else:
+		temp = session.query(User).filter_by(username=flask_login.current_user.username).first()
+		session.delete(temp)
+		session.commit()
+		try:
+			temp = session.query(Shop).filter_by(user=flask_login.current_user.username).first()
+			session.delete(temp)
+			session.commit()
+		except Exception as e:
+			pass
+		flask_login.logout_user()
+		return redirect(url_for('mainpage'))
+
 #sign up page
 #########################################################
 @app.route('/sign_up', methods = ['GET','POST'])
@@ -374,7 +395,7 @@ def daftar():
 			return 'Username has already taken'
 
 		photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
-		return('sign up success')
+		return redirect(url_for('login'))
 	else:
 		if(flask_login.current_user.is_authenticated):
 			return redirect(url_for('profile'))
