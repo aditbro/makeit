@@ -85,32 +85,11 @@
     }
   </style>
   <body>
-    {{nav|safe}}
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1 class="text-center">{{main.name}}</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4 offset-md-2">
-          <img src="{{url_for('static',filename=main.photodir[9:])}}" class="img-responsive text-center" style="width:100%;height:auto">
-        </div>
-        <div class="col-md-4">
-          <p>name = {{main.name}}</p>
-          <p>username = {{main.username}}</p>
-          <p>email = {{main.email}}</p>
-          <p>gender = {{main.gender}}</p>
-          <p>birth date = {{main.birth_date}}</p>
-          <p>phone number = {{main.phone_number}}</p>
-          <p>address = {{main.address}}</p>
-          <div>
-            <a href="/prof/edit" style="display:inline"><button class="btn btn-primary">Edit Info</button></a>
-            <a href="/prof/pass" style="display:inline"><button class="btn btn-success">Edit Password</button></a>
-          </div>
-          <a href="/prof/Delete" style="display:inline"><button class="btn btn-success" style="background-color:red;margin-top:10px">Delete Account</button></a>
-        </div>
-      </div>
-    </div>
+    <h1>You are going to delete your account, your shop will also be deleted</h1>
+    <h2>Proceed?</h2>
+    <a href="/prof"><button>Back</button></a> 
+    <form action='/prof/Delete' method="POST">
+      <button>Proceed</button>
+    </form>
   </body>
 </html>
