@@ -197,3 +197,73 @@ IndexError: list index out of range
 (<database_setup.Shop object at 0x7ff853a15518>, <database_setup.Article object at 0x7ff853a15f60>)
 (<database_setup.Shop object at 0x7ff853a06dd8>, <database_setup.Article object at 0x7ff853a062e8>)
 127.0.0.1 - - [20/Apr/2018 22:29:18] "GET /stat HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:14] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/css/bootstrap.min.css HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/js/bootstrap.min.js HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/js/jquery.js HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/css/custom.css HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/js/custom.js HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:15] "GET /static/img/logo-trimmed.png HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:16] "GET /static/img/city-sunrise.png HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:16] "GET /static/img/background-white.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /profile HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/18.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/produk_180313_0004.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/Minimalist_-_35k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/products.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/420392.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:18] "GET /static/img/photo_bucket/195083.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:19] "GET /static/img/photo_bucket/Arga_-_16k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:19] "GET /static/img/photo_bucket/Kire_Earring_-_30k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:19] "GET /static/img/photo_bucket/Midnight_-_28k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:19] "GET /static/img/photo_bucket/S__78905536.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:20] "GET /static/img/photo_bucket/Rumbe_Classic_-_36k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:20] "GET /static/img/photo_bucket/S__79028285.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:20] "GET /static/img/photo_bucket/120180316_2_180324_0006.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:21] "GET /static/img/photo_bucket/Freya_black.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:21] "GET /static/img/photo_bucket/Ta_Ta_Ta_Grey_-_22k.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:21] "GET /static/img/photo_bucket/S__78905543.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:21] "GET /static/img/photo_bucket/195078.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:22] "GET /static/img/photo_bucket/378830.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:22] "GET /static/img/photo_bucket/S__77979685.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:22] "GET /static/img/photo_bucket/120180316_1_180324_0021.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:22] "GET /static/img/photo_bucket/S__79020088.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/1257967.jpg HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/20180314_180319_0004.jpg HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/20180316_180324_0011.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/Smoothies_Mangga_Glory_Glow.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/Smoothies_buah_naga__pisang_Beauty_Blush.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:23] "GET /static/img/photo_bucket/Smoothies_Melon__bayem_Fountain_of_Joy.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/1Smoothies_Mangga_Glory_Glow.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/S__79134748.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/arc.png HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/S__79134747.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/S__79134751.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/S__8577116.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:24] "GET /static/img/photo_bucket/S__79134752.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:25] "GET /static/img/photo_bucket/S__79028251.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:25] "GET /static/img/photo_bucket/11519032320775.jpg HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:38] "GET /category/Dessert/Sweet%20and%20cold/Sweet%20n%20Cold HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:38] "GET /category/Dessert/Sweet%20and%20cold/Sweet%20n%20Cold HTTP/1.0" 200 -
+127.0.0.1 - - [20/Apr/2018 23:47:38] "GET /static/js/fadeslideshow.js HTTP/1.0" 304 -
+127.0.0.1 - - [20/Apr/2018 23:47:38] "GET /static/js/jquery.touchSwipe.min.js HTTP/1.0" 304 -
+[2018-04-20 23:47:38,994] ERROR in app: Exception on /category/Dessert/Sweet and cold/loading.gif [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.5/dist-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.5/dist-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "./trial.py", line 553, in showitem
+    return render_template('item.html',item=items,photos=photos,content=item[0][0].content,title=item[0][0].title,nav=nav.format('','','',''),logged_in=log_in,not_logged_in=not_log_in)
+IndexError: list index out of range
+127.0.0.1 - - [20/Apr/2018 23:47:38] "GET /category/Dessert/Sweet%20and%20cold/loading.gif HTTP/1.0" 500 -
+127.0.0.1 - - [20/Apr/2018 23:47:50] "GET /category/Dessert/Sweet%20and%20cold/Sweet%20n%20Cold/buy HTTP/1.0" 200 -
