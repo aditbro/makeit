@@ -22,7 +22,10 @@ SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Python Quickstart'
 BUY_HEADER = 'Makeithappen.id order {}'
-BUY_MSG = '''<p>Request pembelian item {}</p></br>
+BUY_MSG = '''<h2>JANGAN BALAS EMAIL INI</h2>
+<h2>DO NOT REPLY TO THIS EMAIL</h2>
+<p>Penjual diharapkan langsung menghubungi pembeli melalui kontak yang diberikan</p>
+<p>Request pembelian item {}</p></br>
 <p>oleh : {}</p></br>
 no telp : {}</p></br>
 email : {}</p></br>
