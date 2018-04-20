@@ -358,7 +358,10 @@ def delAcc():
 		session.commit()
 		try:
 			temp = session.query(Shop).filter_by(user=flask_login.current_user.username).first()
+			shopName = temp.name
+			tempTag = session.query(ShopTag).filter_by(name=shopName).first()
 			session.delete(temp)
+			session.delete(tempTag)
 			session.commit()
 		except Exception as e:
 			pass
