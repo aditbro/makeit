@@ -119,7 +119,7 @@ from database_setup import User, Article, ShopPhoto, ShopTag, Tags, Base, Shop, 
 from werkzeug.utils import secure_filename
 from flask_mail import Mail, Message
 
-visitor = 219
+visitor = 411
 
 #HTML TEMPLATE
 #########################################################
@@ -318,7 +318,10 @@ def editprof():
 		main.birth_date = request.form['birth_date']
 		main.phone_number = request.form['phone_number']
 		main.address = request.form['address']
-		session.commit()
+		try:
+			session.commit()
+		except:
+			session.rollback()
 		return redirect(url_for('prof'))
 
 #Edit password
@@ -443,7 +446,10 @@ def daftar_seller():
 		session.add(new_shop)
 		session.add(new_shoptag)
 		session.add(new_shopphoto)
-		session.commit()
+		try:
+			session.commit()
+		except:
+			session.rollback()
 		photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
 		return(redirect(url_for('login')))
 	else:
@@ -618,7 +624,11 @@ def add_shop():
 			photos = request.files.getlist('photo')
 			shop = session.query(Shop).filter_by(user=flask_login.current_user.username).first().name
 			new_article = Article(title=title,content=description,date_created=datetime.datetime.now().strftime("%Y-%m-%d"),shop=shop)
-			session.add(new_article)
+			try:
+				session.add(new_article)
+				session.commit()
+			except:
+				session.rollback()
 			for photo in photos:
 				photoname = secure_filename(photo.filename)
 				if(not allowed_file(photoname)):
@@ -631,7 +641,6 @@ def add_shop():
 				new_photo = ArticlePhoto(dir=photodir,articlename=title)
 				session.add(new_photo)
 				photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
-			session.commit()
 			return(redirect(url_for('shop')))
 		else:
 			return render_template('addshop.html')
@@ -659,7 +668,10 @@ def edit_shop(title):
 			content = request.form['description']
 			item = session.query(Article).filter_by(title=title).first()
 			item.content = content
-			session.commit()
+			try:
+				session.commit()
+			except:
+				session.rollback()
 			return(redirect(url_for('shop')))
 		else:
 			item = session.query(Article).filter_by(title=title).first()
