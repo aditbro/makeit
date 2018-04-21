@@ -381,29 +381,27 @@ def daftar():
 	if request.method == 'POST':
 		nama = request.form['nama']
 		gender = request.form['gender']
-		lahir = request.form['lahir']
-		address = request.form['address']
+		lahir = 'ole'
+		address = 'ole'
+		# lahir = request.form['lahir']
+		# address = request.form['address']
 		phone = request.form['phone']
 		email = request.form['email']
 		username = request.form['username']
 		password = request.form['password']
-		photo = request.files['photo']
-		photoname = secure_filename(photo.filename)
-		if(not allowed_file(photoname)):
-			return ('photo type is not allowed')
-		photodir =  os.path.join(app.config['UPLOAD_FOLDER'], photoname)
-		i = 1
-		while(session.query(ArticlePhoto).filter_by(dir=photodir).first() or session.query(ShopPhoto).filter_by(dir=photodir).first() or session.query(User).filter_by(photodir=photodir).first()):
-			photoname = str(i) + photoname
-			photodir =  os.path.join(app.config['UPLOAD_FOLDER'], photoname)
+		# photo = request.files['photo']
+		# photoname = secure_filename(photo.filename)
+		# if(not allowed_file(photoname)):
+		# 	return ('photo type is not allowed')
+		photodir =  '/static/iimg/photo_bucket/linux.jpg'
 		new_user = User(username,password,nama,email,gender,lahir,phone,address,photodir)
 		session.add(new_user)
 		try:
 			session.commit()
 		except Exception as E:
-			return 'Username has already taken'
+			session.rollback()
 
-		photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
+		# photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoname))
 		return redirect(url_for('login'))
 	else:
 		if(flask_login.current_user.is_authenticated):
@@ -698,6 +696,11 @@ def send_test_mail():
 	kirim = create_message('Test', 'aditya.farizki1@gmail.com', 'PEMINJAMAN MEJA', "email testing")
 	send_message(get_service(),"me",kirim)
 	return "check email"
+
+@app.route('/rollback', methods=['GET'])
+def rollback():
+	session.rollback()
+	return redirect(url_for('mainpage'))
 
 #main
 #########################################################
